@@ -1,0 +1,45 @@
+{% load static %}
+{% block body %}
+{% include 'nava.html' %}
+
+<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
+   View lastes job
+</marquee>
+
+<div class="container">
+<table class="table table-hover " id="example">
+   <thead>
+   <tr style="background-color:red">
+      <th>S.No.</th>
+      <th>Title</th>
+     <th>company</th>
+      <th>start date</th>
+     <th>end date</th>
+     <th>location</th>
+      <th>Action</th>
+
+   </tr>
+   </thead>
+   <tbody>
+   {% for i in job %}
+   <tr style="background-color:green">
+      <td>{{forloop.counter}}</td>
+      <td>{{i.title}}</td>
+     <td>{{i.recruiter.company}}</td>
+      <td>{{i.start_date}}</td>
+     <td>{{i.end_date}}</td>
+     <td>{{i.location}}</td>
+
+
+     {% if i.id in li %}
+       <td>Applied</td>
+       {% else %}
+      <td><a href="{% url 'job_detail' i.id %}" class="btn btn-danger">Apply</a></td>
+      {% endif %}
+   </tr>
+   {% endfor %}
+   </tbody>
+</table>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

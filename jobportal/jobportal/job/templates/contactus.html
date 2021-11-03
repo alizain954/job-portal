@@ -1,0 +1,28 @@
+{% load static %}
+{% block body %}
+{% include 'nav.html' %}
+<div class="container " style="margin-top: 50px">
+    <h1 class="text-center"> Contact Us </h1>
+  <div class="row mt-5 text-center">
+    <div class="col-lg-3">
+     <h4><i class="fas fa-phone-square">  Contact</i></h4>
+        <p class="class taxt-danger font-weight-bold mt-3"><a href="tel:03068976305">03068976305</a></p>
+    </div>
+    <div class="col-lg-3">
+      <h4><i class="fa fa-envelope">  send-Email</i></h4>
+        <p class="font-weight-bold mt-3"><a href="mailto:">info@dhqlyh.pitb.gov.pk</a></p>
+    </div>
+    <div class="col-lg-3">
+      <h4><i class="fa fa-address-card">  Office address</i></h4>
+        <p class="font-weight-bold mt-3"><a href="https://www.google.com/maps/search/dhq+layyah+address+on+google+map/@30.9658848,70.9151417,13z/data=!3m1!4b1?hl=en-GB">
+            Adress of Our Office
+        </a></p>
+    </div>
+      <div class="col-lg-3">
+     <h4><i class="fa fa-address-card">  Office time</i></h4>
+          <p class="font-weight-bold mt-3"> 10 AM TO 5PM</p>
+    </div>
+  </div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

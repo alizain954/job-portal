@@ -1,0 +1,43 @@
+{% load static %}
+{% block body %}
+{% include 'nav.html' %}
+
+<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
+   View lastes job
+</marquee>
+
+<div class="container">
+<table class="table table-hover " id="example">
+   <thead>
+   <tr style="background-color:red">
+      <th>S.No.</th>
+      <th>Title</th>
+     <th>company</th>
+      <th>start date</th>
+     <th>end date</th>
+     <th>location</th>
+      <th>Action</th>
+
+   </tr>
+   </thead>
+   <tbody>
+   {% for i in data %}
+   <tr style="background-color:green">
+      <td>{{forloop.counter}}</td>
+      <td>{{i.title}}</td>
+     <td>{{i.recruiter.company}}</td>
+      <td>{{i.start_date}}</td>
+     <td>{{i.end_date}}</td>
+     <td>{{i.location}}</td>
+
+
+
+      <td><a href="{% url 'user_login'  %}" class="btn btn-danger">Apply</a></td>
+      </td>
+   </tr>
+   {% endfor %}
+   </tbody>
+</table>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load static %}
+{% block body %}
+{% include 'nava.html' %}
+
+<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
+  Job Detail
+</marquee>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{job.image.url}}" width="300px" height="300px">
+        </div>
+        <div class="col-md-6">
+            <h2>{{job.title}}</h2>
+            <p>{{job.recruiter.company}}<a href="{% url 'user_latestjob' %}">(views all job)</a></p>
+       <b>location</b> = <a href="#" >{{job.location}}</a><br><br>
+        <b>creationdate</b> =  <a href="#" >{{job.creationdate}}</a>
+            <br><br>
+            <b>Salary</b> = {{job.salary}}Rs<br><br>
+            <a href="{% url 'applyforjob' job.id %}" class="btn btn-danger">Apply for Job</a>
+        </div>
+        <div class="col-md-2">
+            <h2>overview</h2>
+            <p><b>{{job.description}}</b></p>
+
+            <h2>Experience Required</h2>
+            <p><b>{{job.experience}}</b></p>
+
+            <h2>skill</h2>
+            <p><b>{{job.skill}}</b></p>
+
+            <h2>start date for Apply</h2>
+            <p><b>{{job.start_date}}</b></p>
+
+             <h2>last date for Apply</h2>
+            <p><b>{{job.end_date}}</b></p>
+        </div>
+        
+    </div>
+
+</div>
+{% include 'footer.html' %}
+{% endblock %}
