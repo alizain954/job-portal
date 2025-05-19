@@ -16,25 +16,25 @@
         <input type="submit" value="Submit" class="btn btn-danger mt-3">
     </form>
 </div>
-{% ifequal error "close" %}
+{% if error == "close" %}
 <script>
     alert("Application are closed, late date is ended");
     window.location = ('{% url 'user_latestjob' %}')
 </script>
-{% endifequal %}
+{% endif %}
 
-{% ifequal error "notopen" %}
+{% if error == "notopen" %}
 <script>
     alert("Application is not open");
     window.location = ('{% url 'user_latestjob' %}')
 </script>
-{% endifequal %}
+{% endif %}
 
-{% ifequal error "done" %}
+{% if error == "done" %}
 <script>
     alert("Application submitted Successfully");
     window.location = ('{% url 'user_latestjob' %}')
 </script>
-{% endifequal %}
+{% endif %}
 
 {% endblock %}

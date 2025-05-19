@@ -75,17 +75,17 @@
 </div>
 {% include 'footer.html' %}
 
-{% ifequal error "no" %}
+{% if error == "no" %}
 <script>
     alert("your profile updated successful");
     window.location = ('{% url 'user_home' %}')
 </script>
-{% endifequal %}
-{% ifequal error "yes" %}
+{% endif %}
+{% if error == "yes" %}
 <script>
     alert("something go to wrong");
 </script>
-{% endifequal %}
+{% endif %}
 
 
 {% endblock %}

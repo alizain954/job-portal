@@ -14,15 +14,16 @@
     <input type="submit" class="btn btn-primary" style="margin-top:2%">
 </form>
 
-{% ifequal error "no" %}
+{% if error == "no" %}
 <script>
     alert("status change successful");
-    window.location = ('{% url 'recruiter_all' %}')
+    window.location = ('{% url 'recruiter_all' %}');
 </script>
-{% endifequal %}
-{% ifequal error "yes" %}
+{% endif %}
+
+{% if error == "yes" %}
 <script>
-    alert("something go to wrong");
+    alert("something went wrong");
 </script>
-{% endifequal %}
+{% endif %}
 {% endblock %}

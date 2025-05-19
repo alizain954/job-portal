@@ -15,15 +15,16 @@
     <a href="{% url 'user_signup' %}" class="btn btn-primary" style="margin-top:2%">Create An Account</a>
 </form>
 {% include 'footer.html' %}
-{% ifequal error "no" %}
+{% if error == "no" %}
 <script>
     alert("login successful");
-    window.location = ('{% url 'user_home' %}')
+    window.location = ('{% url 'user_home' %}');
 </script>
-{% endifequal %}
-{% ifequal error "yes" %}
+{% endif %}
+
+{% if error == "yes" %}
 <script>
-    alert("something go to wrong");
+    alert("something went wrong");
 </script>
-{% endifequal %}
+{% endif %}
 {% endblock %}

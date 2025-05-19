@@ -68,17 +68,17 @@
 </form>
 {% include 'footer.html' %}
 
-{% ifequal error "no" %}
+{% if error == "no" %}
 <script>
     alert("Job detail have been updated");
     window.location = ('{% url 'edit_jobdetail' job.id %}')
 </script>
-{% endifequal %}
-{% ifequal error "yes" %}
+{% endif %}
+{% if error == "yes" %}
 <script>
     alert("something goes to wrong");
 </script>
-{% endifequal %}
+{% endif  %}
 
 
 {% endblock %}

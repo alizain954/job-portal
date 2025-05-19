@@ -69,17 +69,17 @@
 </form>
 {% include 'footer.html' %}
 
-{% ifequal error "no" %}
+{% if error == "no" %}
 <script>
     alert("Job detail have been added");
-    window.location = ('{% url 'job_list' %}')
+    window.location = ('{% url 'job_list' %}');
 </script>
-{% endifequal %}
-{% ifequal error "yes" %}
-<script>
-    alert("something go to wrong");
-</script>
-{% endifequal %}
+{% endif %}
 
+{% if error == "yes" %}
+<script>
+    alert("something went wrong");
+</script>
+{% endif %}
 
 {% endblock %}
