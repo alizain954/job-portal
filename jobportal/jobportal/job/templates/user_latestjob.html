@@ -2,44 +2,156 @@
 {% block body %}
 {% include 'nava.html' %}
 
-<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
-   View lastes job
-</marquee>
+<style>
+  .page-header {
+    font-size: 28px;
+    font-weight: 700;
+    color: #4B0082;
+    background-color: #6a1b9a;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 1rem auto 2rem;
+    max-width: 900px;
+    text-align: center;
+    color: white;
+    user-select: none;
+  }
 
-<div class="container">
-<table class="table table-hover " id="example">
-   <thead>
-   <tr style="background-color:red">
-      <th>S.No.</th>
-      <th>Title</th>
-     <th>company</th>
-      <th>start date</th>
-     <th>end date</th>
-     <th>location</th>
-      <th>Action</th>
+  .table-container {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    overflow-x: auto;
+    box-shadow: 0 8px 24px rgba(75, 0, 130, 0.15);
+    border-radius: 12px;
+    background-color: #fff;
+  }
 
-   </tr>
-   </thead>
-   <tbody>
-   {% for i in job %}
-   <tr style="background-color:green">
-      <td>{{forloop.counter}}</td>
-      <td>{{i.title}}</td>
-     <td>{{i.recruiter.company}}</td>
-      <td>{{i.start_date}}</td>
-     <td>{{i.end_date}}</td>
-     <td>{{i.location}}</td>
+  table.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
 
+  thead tr {
+    background-color: #4a148c; /* dark purple */
+    color: #fff;
+  }
 
-     {% if i.id in li %}
-       <td>Applied</td>
-       {% else %}
-      <td><a href="{% url 'job_detail' i.id %}" class="btn btn-danger">Apply</a></td>
-      {% endif %}
-   </tr>
-   {% endfor %}
-   </tbody>
-</table>
+  thead th {
+    padding: 12px 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    background-color: #e8eaf6; /* light purple */
+    transition: background-color 0.3s ease;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #f3e5f5; /* lighter purple */
+  }
+
+  tbody tr:hover {
+    background-color: #d1c4e9; /* highlight */
+  }
+
+  tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 150px;
+  }
+
+  tbody td:last-child {
+    text-align: center;
+  }
+
+  a.btn-apply {
+    background-color: #d32f2f; /* bootstrap danger dark */
+    color: white;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  a.btn-apply:hover,
+  a.btn-apply:focus {
+    background-color: #9a0007;
+    color: white;
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.6);
+    outline: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header {
+      font-size: 24px;
+      padding: 12px 15px;
+      max-width: 95%;
+    }
+
+    .table-container {
+      max-width: 95%;
+      margin-bottom: 2rem;
+    }
+
+    tbody td {
+      max-width: none;
+      white-space: normal;
+      word-break: break-word;
+    }
+  }
+</style>
+
+<div class="page-header" role="heading" aria-level="1">
+  Latest Jobs
 </div>
+
+<div class="table-container" role="region" aria-label="Latest job listings">
+  <table class="table" aria-describedby="Latest Jobs">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Title</th>
+        <th scope="col">Company</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Location</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in job %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.title }}</td>
+        <td>{{ i.recruiter.company }}</td>
+        <td>{{ i.start_date|date:"M d, Y" }}</td>
+        <td>{{ i.end_date|date:"M d, Y" }}</td>
+        <td>{{ i.location }}</td>
+        <td>
+          {% if i.id in li %}
+            <span style="color: #555; font-weight: 600;">Applied</span>
+          {% else %}
+            <a href="{% url 'job_detail' i.id %}" class="btn-apply" role="button" aria-label="Apply to {{ i.title }}">Apply</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="7" class="text-center text-muted">No job listings available currently.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
 {% include 'footer.html' %}
 {% endblock %}

@@ -2,43 +2,149 @@
 {% block body %}
 {% include 'nava.html' %}
 
-<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
+<style>
+  .page-header {
+    font-size: 28px;
+    font-weight: 700;
+    color: #4B0082;
+    background-color: #6a1b9a;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 1rem auto 2rem;
+    max-width: 900px;
+    text-align: center;
+    color: white;
+    user-select: none;
+  }
+
+  .job-detail-container {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(75, 0, 130, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    color: #333;
+  }
+
+  .job-image {
+    flex: 0 0 300px;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(75, 0, 130, 0.25);
+  }
+
+  .job-info {
+    flex: 1 1 400px;
+  }
+
+  .job-info h2 {
+    font-weight: 700;
+    color: #4B0082;
+    margin-bottom: 10px;
+  }
+
+  .job-info p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+
+  .job-info b {
+    font-weight: 700;
+  }
+
+  .job-info a {
+    color: #009688;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .job-info a:hover,
+  .job-info a:focus {
+    text-decoration: underline;
+  }
+
+  .job-extra {
+    flex: 0 0 250px;
+    width: 100%;
+  }
+
+  .job-extra h3 {
+    color: #4B0082;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .btn-apply {
+    background-color: #d32f2f;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-apply:hover,
+  .btn-apply:focus {
+    background-color: #9a0007;
+    outline: none;
+    color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .job-detail-container {
+      flex-direction: column;
+      padding: 20px;
+    }
+    .job-extra {
+      flex-basis: 100%;
+    }
+  }
+</style>
+
+<div class="page-header" role="heading" aria-level="1">
   Job Detail
-</marquee>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <img src="{{job.image.url}}" width="300px" height="300px">
-        </div>
-        <div class="col-md-6">
-            <h2>{{job.title}}</h2>
-            <p>{{job.recruiter.company}}<a href="{% url 'user_latestjob' %}">(views all job)</a></p>
-       <b>location</b> = <a href="#" >{{job.location}}</a><br><br>
-        <b>creationdate</b> =  <a href="#" >{{job.creationdate}}</a>
-            <br><br>
-            <b>Salary</b> = {{job.salary}}Rs<br><br>
-            <a href="{% url 'applyforjob' job.id %}" class="btn btn-danger">Apply for Job</a>
-        </div>
-        <div class="col-md-2">
-            <h2>overview</h2>
-            <p><b>{{job.description}}</b></p>
-
-            <h2>Experience Required</h2>
-            <p><b>{{job.experience}}</b></p>
-
-            <h2>skill</h2>
-            <p><b>{{job.skill}}</b></p>
-
-            <h2>start date for Apply</h2>
-            <p><b>{{job.start_date}}</b></p>
-
-             <h2>last date for Apply</h2>
-            <p><b>{{job.end_date}}</b></p>
-        </div>
-        
-    </div>
-
 </div>
+
+<div class="job-detail-container">
+  <img src="{{ job.image.url }}" alt="{{ job.title }}" class="job-image" />
+
+  <div class="job-info">
+    <h2>{{ job.title }}</h2>
+    <p><b>Company:</b> {{ job.recruiter.company }} <a href="{% url 'user_latestjob' %}">(View all jobs)</a></p>
+    <p><b>Location:</b> <a href="#">{{ job.location }}</a></p>
+    <p><b>Creation Date:</b> {{ job.creationdate|date:"M d, Y" }}</p>
+    <p><b>Salary:</b> {{ job.salary }} Rs</p>
+
+    <a href="{% url 'applyforjob' job.id %}" class="btn-apply" role="button" aria-label="Apply for {{ job.title }}">Apply for Job</a>
+  </div>
+
+  <div class="job-extra" aria-label="Job additional details">
+    <h3>Overview</h3>
+    <p>{{ job.description }}</p>
+
+    <h3>Experience Required</h3>
+    <p>{{ job.experience }}</p>
+
+    <h3>Skills</h3>
+    <p>{{ job.skill }}</p>
+
+    <h3>Application Start Date</h3>
+    <p>{{ job.start_date|date:"M d, Y" }}</p>
+
+    <h3>Application End Date</h3>
+    <p>{{ job.end_date|date:"M d, Y" }}</p>
+  </div>
+</div>
+
 {% include 'footer.html' %}
 {% endblock %}

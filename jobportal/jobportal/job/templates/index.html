@@ -1,69 +1,92 @@
 {% load static %}
 {% block body %}
 {% include 'nav.html' %}
-<style>
-    .container{
-    max-width : 90%;
-    }
-</style>
-<div class="container-fliud" style="margin-top:1%">
-    <img src="{% static 'image/c7.png' %}" height="450px" width="100%">
-</div>
-<div class="container" style="background-color:green; height:650px; margin-top:2%">
-<h1 class="text-center text-white">------| OUR PLACED STUDENTS |------</h1>
-    <div class="row mt-3">
-        <div class="col-md-3">
-            <img src="{% static 'image/IMG_1539.JPG' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">Facebook</h3>
-            </div>
-        </div>
-         <div class="col-md-3">
-            <img src="{% static 'image/c14.JPG' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">Amazone</h3>
-            </div>
-        </div>
-         <div class="col-md-3">
-            <img src="{% static 'image/IMG_1613.JPG' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">ZIIBAY SOFT</h3>
-            </div>
-        </div>
-         <div class="col-md-3">
-            <img src="{% static 'image/c8.JPG' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">Python Developer</h3>
-            </div>
-        </div>
-    </div>
 
-      <div class="row mt-3">
-        <div class="col-md-3">
-            <img src="{% static 'image/IMG-20201008-WA0116_-_Copy.jpg' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">Fluter developer</h3>
-            </div>
-        </div>
-         <div class="col-md-3">
-            <img src="{% static 'image/IMG-20200730-WA0005.jpg' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">Wordpress developer</h3>
-            </div>
-        </div>
-         <div class="col-md-3">
-            <img src="{% static 'image/c20.jpg' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">PHP developer</h3>
-            </div>
-        </div>
-         <div class="col-md-3">
-            <img src="{% static 'image/c8.JPG' %}" style="width:100%; margin-top:5%; height:200px; border-radius:50%;">
-            <div>
-                <h3 class="text-center">Andriod</h3>
-            </div>
-        </div>
-    </div>
-</div>
-{% include 'footer.html' %}
+<style>
+  main.content {
+    margin-left: 250px;
+    padding: 6rem 3rem 4rem;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push footer down */
+  }
+
+  @media (max-width: 768px) {
+    main.content {
+      margin-left: 0;
+      padding: 5rem 1.5rem 3rem;
+    }
+  }
+
+  .image-row {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .image-row img {
+    flex: 1 1 calc(25% - 15px);
+    max-width: calc(25% - 15px);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    height: 300px; /* increased height for larger images */
+    object-fit: cover;
+  }
+
+  .image-row img:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .image-row img {
+      flex: 1 1 calc(50% - 15px);
+      max-width: calc(50% - 15px);
+      margin-bottom: 20px;
+      height: 250px; /* increased height for tablet */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .image-row img {
+      flex: 1 1 100%;
+      max-width: 100%;
+      margin-bottom: 20px;
+      height: 220px; /* increased height for mobile */
+    }
+  }
+
+  .quote-section {
+    max-width: 900px;
+    margin: 3rem auto 1rem;
+    font-style: italic;
+    color: #004d40;
+    border-left: 5px solid #00bfa6;
+    padding-left: 1rem;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    user-select: none;
+  }
+</style>
+
+<main class="content">
+  <!-- Images Row: Main Banner + 3 Others -->
+  <div class="image-row" aria-label="Featured job banners">
+    <img src="{% static 'image/c7.png' %}" alt="Job Portal Banner" />
+    <img src="{% static 'image/gallery2.jpg' %}" alt="Featured Job 2" />
+    <img src="{% static 'image/gallery3.jpg' %}" alt="Featured Job 3" />
+    <img src="{% static 'image/gallery4.jpg' %}" alt="Featured Job 4" />
+  </div>
+
+  <!-- Inspirational Quote -->
+  <section class="quote-section" aria-label="Inspirational quote">
+    "Success usually comes to those who are too busy to be looking for it." – Henry David Thoreau
+  </section>
+
+  {% include 'footer.html' %}
+</main>
 {% endblock %}

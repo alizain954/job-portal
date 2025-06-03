@@ -2,37 +2,78 @@
 {% block body %}
 {% include 'admin_nava.html' %}
 
-<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
-   View All Student User
-</marquee>
+<style>
+    .page-header {
+        font-size: 28px;
+        font-weight: bold;
+        color: white;
+        background-color: #6f42c1;
+        padding: 12px 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
 
-<div class="container">
-<table class="table table-hover " id="example">
-   <thead>
-   <tr style="background-color:red">
-      <th>S.No.</th>
-      <th>Full Name</th>
-      <th>Email ID</th>
-      <th>Contact</th>
-      <th>Gender</th>
-      <th>Image</th>
-      <th>Action</th>
-   </tr>
-   </thead>
-   <tbody>
-   {% for i in data %}
-   <tr style="background-color:green">
-      <td>{{forloop.counter}}</td>
-      <td>{{i.user.first_name}} {{i.user.last_name}}</td>
-      <td>{{i.user.username}}</td>
-      <td>{{i.mobile}}</td>
-      <td>{{i.gender}}</td>
-      <td><img src="{{i.image.url}}" height="100px" width="100px"></td>
-      <td><a href="{% url 'delete_user' i.user.id %}" class="btn btn-danger" onclick="return confirm('Are you sure to delete it')">Delete</a></td>
-   </tr>
-   {% endfor %}
-   </tbody>
-</table>
+    .table thead {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .table tbody tr {
+        background-color: #f8f9fa;
+    }
+
+    .table img {
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    .table-container {
+        margin-top: 30px;
+    }
+</style>
+
+<div class="container table-container">
+    <div class="page-header">View All Student Users</div>
+
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Full Name</th>
+                    <th>Email ID</th>
+                    <th>Contact</th>
+                    <th>Gender</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.user.first_name }} {{ i.user.last_name }}</td>
+                    <td>{{ i.user.username }}</td>
+                    <td>{{ i.mobile }}</td>
+                    <td>{{ i.gender }}</td>
+                    <td>
+                        <img src="{{ i.image.url }}" alt="User Image" height="80" width="80">
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_user' i.user.id %}" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted">No student users found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
+
 {% include 'footer.html' %}
 {% endblock %}

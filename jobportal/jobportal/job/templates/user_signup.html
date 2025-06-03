@@ -1,91 +1,222 @@
 {% load static %}
 {% block body %}
 {% include 'nav.html' %}
+
+<style>
+  body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .container {
+    padding-top: 110px; /* space for fixed navbar */
+  }
+
+  .signup-box {
+    max-width: 700px;
+    margin: 3rem auto 5rem;
+    padding: 40px 35px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 8px 24px rgba(75, 0, 130, 0.15);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .signup-box:hover {
+    box-shadow: 0 12px 32px rgba(75, 0, 130, 0.3);
+  }
+
+  .signup-header {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #4B0082;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    user-select: none;
+  }
+
+  label {
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  input.form-control,
+  input[type="file"] {
+    width: 100%;
+    border-radius: 8px;
+    border: 1.5px solid #ccc;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    margin-bottom: 20px;
+  }
+
+  input.form-control:focus,
+  input[type="file"]:focus {
+    border-color: #4B0082;
+    box-shadow: 0 0 8px rgba(75, 0, 130, 0.3);
+    outline: none;
+  }
+
+  .form-group,
+  .form-row {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Radio buttons alignment */
+  .gender-group {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+
+  .form-check {
+    display: flex;
+    align-items: center;
+  }
+
+  .form-check-input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .form-check-label {
+    margin-left: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #3a3a3a;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .btn-custom {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-radius: 8px;
+    background-color: #009688;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-custom:hover,
+  .btn-custom:focus {
+    background-color: #00796b;
+    box-shadow: 0 8px 20px rgba(0, 121, 107, 0.5);
+    outline: none;
+    color: #fff;
+  }
+
+  /* Responsive Layout */
+  @media (max-width: 768px) {
+    .signup-box {
+      padding: 30px 25px;
+      margin: 2rem 1.5rem 4rem;
+    }
+    .signup-header {
+      font-size: 28px;
+    }
+    .gender-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>
+
 <script>
-    function checkpass()
-    {
-    if(document.signup.pwd.value!=document.signup.cpwd.value)
-    {
-    alert('password does not match');
-    document.signup.cpwd.focus();
-    return false;
+  function checkpass() {
+    const pwd = document.signup.pwd.value;
+    const cpwd = document.signup.cpwd.value;
+    if (pwd !== cpwd) {
+      alert('Passwords do not match!');
+      document.signup.cpwd.focus();
+      return false;
     }
     return true;
-    }
+  }
 </script>
 
+<div class="container">
+  <div class="signup-box shadow-sm">
+    <div class="signup-header">User Sign Up</div>
+    <form name="signup" method="post" enctype="multipart/form-data" onsubmit="return checkpass();">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="col-md-6">
+          <label for="fname"><strong>First Name</strong></label>
+          <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter First Name" required>
+        </div>
+        <div class="col-md-6">
+          <label for="lname"><strong>Last Name</strong></label>
+          <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter Last Name" required>
+        </div>
+      </div>
 
-<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
-    User SignUp
-</marquee>
-<hr>
-<form class="container mt-5" onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-   <div class="form-row">
-       <div class="form-group col-md-6">
-           <label>First Name</label>
-           <input type="text" class="form-control" name="fname" placeholder="Enter First Name" required>
-       </div>
-        <div class="form-group col-md-6">
-           <label>Last Name</label>
-           <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" required>
-       </div>
-   </div>
-     <div class="form-row">
-       <div class="form-group col-md-12">
-           <label>Contact Number</label>
-           <input type="text" class="form-control" name="contact" placeholder="Enter Contact Num" required>
-       </div>
-   </div>
-     <div class="form-row">
-       <div class="form-group col-md-12">
-           <label>Email </label>
-           <input type="text" class="form-control" name="email" placeholder="Enter Email" required>
-       </div>
-   </div>
-    <div class="form-row">
-       <div class="form-group col-md-6">
-           <label>Password</label>
-           <input type="password" class="form-control" name="pwd" placeholder="Enter Password" required>
-       </div>
-        <div class="form-group col-md-6">
-           <label>Confirm Password</label>
-           <input type="password" class="form-control" name="cpwd" placeholder="Enter Confirm Password" required>
-       </div>
-   </div>
-    <div class="form-row">
-       <div class="form-group col-md-6">
-          <label>Gender</label><br>
-           <div class="custom-control custom-radio custom-control-inline">
-               <input type="radio" name="gender" id="customRadioInline1" class="custom-control-input" value="Male" required>
-               <label class="custom-control-label" for="customRadioInline1">Male</label>
-           </div><br>
-            <div class="custom-control custom-radio custom-control-inline">
-               <input type="radio" name="gender" id="customRadioInline2" class="custom-control-input" value="Female" required>
-               <label class="custom-control-label" for="customRadioInline2">Female</label>
-           </div>
-       </div>
-        <div class="form-group col-md-6">
-           <label>Image</label>
-           <input type="file" class="form-control" name="image" required>
-       </div>
-   </div>
-    <input type="submit" value="Submit" class="btn btn-primary mt-3">
-</form>
+      <div class="form-group">
+        <label for="contact"><strong>Contact Number</strong></label>
+        <input type="text" class="form-control" name="contact" id="contact" placeholder="Enter Contact Number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email"><strong>Email</strong></label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email" required>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label for="pwd"><strong>Password</strong></label>
+          <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Enter Password" required>
+        </div>
+        <div class="col-md-6">
+          <label for="cpwd"><strong>Confirm Password</strong></label>
+          <input type="password" class="form-control" name="cpwd" id="cpwd" placeholder="Confirm Password" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><strong>Gender</strong></label>
+        <div class="gender-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="image"><strong>Profile Image</strong></label>
+        <input type="file" class="form-control-file" name="image" id="image" required>
+      </div>
+
+      <button type="submit" class="btn btn-custom">Register</button>
+    </form>
+  </div>
+</div>
+
 {% include 'footer.html' %}
 
 {% if error == "no" %}
 <script>
-    alert("signup successful");
-    window.location = ('{% url 'user_login' %}');
+  alert("Signup successful!");
+  window.location.href = "{% url 'user_login' %}";
 </script>
-{% endif %}
-
-{% if error == "yes" %}
+{% elif error == "yes" %}
 <script>
-    alert("something went wrong");
+  alert("Something went wrong. Please try again.");
 </script>
 {% endif %}
-
-
 {% endblock %}

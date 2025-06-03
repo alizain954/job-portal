@@ -2,90 +2,199 @@
 {% block body %}
 {% include 'nava.html' %}
 
-<marquee style="font-size:25px; color:green; background-color:purple; font-weight:bold; margin-top:1%;">
-    Recruiter Profile
-</marquee>
-<hr>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
+<style>
+  main.content {
+    margin-left: 250px;
+    padding: 120px 3rem 4rem;
+    min-height: calc(100vh - 140px);
+    background-color: #fff;
+    box-sizing: border-box;
+  }
 
-<form class=" mt-5"  name="signup" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-   <div class="form-row">
-       <div class="form-group col-md-8">
-           <label>First Name</label>
-           <input type="text" class="form-control" name="fname" value="{{student.user.first_name}}" required>
-       </div>
-        <div class="form-group col-md-6">
-           <label>Last Name</label>
-           <input type="text" class="form-control" name="lname" value="{{student.user.last_name}}" required>
-       </div>
-   </div>
-     <div class="form-row">
-       <div class="form-group col-md-12">
-           <label>Contact Number</label>
-           <input type="text" class="form-control" name="contact" value="{{student.mobile}}" required>
-       </div>
-   </div>
-     <div class="form-row">
-       <div class="form-group col-md-12">
-           <label>Email </label>
-           <input type="text" class="form-control" value="{{student.user.username}}" readonly placeholder="Enter Email" required>
-       </div>
-   </div>
+  @media (max-width: 768px) {
+    main.content {
+      margin-left: 0;
+      padding: 100px 1.5rem 4rem;
+    }
+  }
 
-    <div class="form-row">
-       <div class="form-group col-md-6">
-          <label>Gender</label><br>
-           {% if student.gender == 'Male' %}
-           <div class="custom-control custom-radio custom-control-inline">
-               <input type="radio" name="gender" id="customRadioInline1" class="custom-control-input" value="Male" required checked>
-               <label class="custom-control-label" for="customRadioInline1">Male</label>
-           </div><br>
-            <div class="custom-control custom-radio custom-control-inline">
-               <input type="radio" name="gender" id="customRadioInline2" class="custom-control-input" value="Female" required>
-               <label class="custom-control-label" for="customRadioInline2">Female</label>
-           </div>
-       </div>
-        {% else %}
-         <div class="custom-control custom-radio custom-control-inline">
-               <input type="radio" name="gender" id="customRadioInline1" class="custom-control-input" value="Male" required>
-               <label class="custom-control-label" for="customRadioInline1">Male</label>
-           </div><br>
-            <div class="custom-control custom-radio custom-control-inline">
-               <input type="radio" name="gender" id="customRadioInline2" class="custom-control-input" value="Female" required checked>
-               <label class="custom-control-label" for="customRadioInline2">Female</label>
-           </div>
-       </div>
-        {% endif %}
-        <div class="form-group col-md-6">
-           <label>Image</label>
-           <input type="file" class="form-control" name="image" accept="image/*">
-       </div>
-   </div>
-    <input type="submit" value="Submit" class="btn btn-primary mt-3">
-</form>
+  .profile-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(75, 0, 130, 0.15);
+    padding: 40px 35px;
+  }
 
-        </div>
-        <div class="col-sm-4 mt-5 text-center">
-            <img src="{{student.image.url}}" width="300px" height="300px">
-        </div>
+  .profile-header {
+    font-size: 28px;
+    font-weight: 700;
+    color: #4B0082;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  input.form-control,
+  input.form-control-file {
+    width: 100%;
+    border-radius: 8px;
+    border: 1.5px solid #ccc;
+    padding: 12px 15px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input.form-control:focus,
+  input.form-control-file:focus {
+    border-color: #4B0082;
+    box-shadow: 0 0 8px rgba(75, 0, 130, 0.3);
+    outline: none;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form-row > div {
+    flex: 1;
+  }
+
+  /* Gender radio buttons aligned horizontally and vertically */
+  .gender-group {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .form-check {
+    display: flex;
+    align-items: center;
+  }
+
+  .form-check-input {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+  }
+
+  .form-check-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #3a3a3a;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Submit button */
+  .btn-submit {
+    width: 100%;
+    margin-top: 30px;
+    padding: 14px 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-radius: 8px;
+    background-color: #009688;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-submit:hover,
+  .btn-submit:focus {
+    background-color: #00796b;
+    box-shadow: 0 8px 20px rgba(0, 121, 107, 0.5);
+    outline: none;
+    color: #fff;
+  }
+
+  /* Profile Image */
+  .profile-image-container {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .profile-image {
+    max-width: 300px;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(75, 0, 130, 0.25);
+  }
+</style>
+
+<main class="content">
+  <div class="profile-container">
+    <h2 class="profile-header">User Profile</h2>
+
+    <div class="profile-image-container">
+      {% if student.image %}
+        <img src="{{ student.image.url }}" alt="Profile Image" class="profile-image" />
+      {% else %}
+        <img src="{% static 'image/default_profile.png' %}" alt="Default Profile Image" class="profile-image" />
+      {% endif %}
     </div>
-</div>
+
+    <form name="signup" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-row">
+        <div>
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="fname" class="form-control" value="{{student.user.first_name}}" required>
+        </div>
+        <div>
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lname" class="form-control" value="{{student.user.last_name}}" required>
+        </div>
+      </div>
+
+      <div>
+        <label for="contact">Contact Number</label>
+        <input type="text" id="contact" name="contact" class="form-control" value="{{student.mobile}}" required>
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" value="{{student.user.username}}" readonly required>
+      </div>
+
+      <div>
+        <label class="d-block">Gender</label>
+        <div class="gender-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" required {% if student.gender == 'Male' %}checked{% endif %}>
+            <label class="form-check-label" for="genderMale">Male</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female" required {% if student.gender == 'Female' %}checked{% endif %}>
+            <label class="form-check-label" for="genderFemale">Female</label>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label for="image">Profile Image</label>
+        <input type="file" id="image" name="image" class="form-control-file" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn-submit">Submit</button>
+    </form>
+  </div>
+</main>
+
 {% include 'footer.html' %}
-
-{% if error == "no" %}
-<script>
-    alert("your profile updated successful");
-    window.location = ('{% url 'user_home' %}')
-</script>
-{% endif %}
-{% if error == "yes" %}
-<script>
-    alert("something go to wrong");
-</script>
-{% endif %}
-
-
 {% endblock %}
