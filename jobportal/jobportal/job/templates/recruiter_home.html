@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Recruiter Profile</title>
+  <title>Recruiter Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Bootstrap CSS -->
@@ -13,158 +13,24 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
   <style>
-    body,
-    html {
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f8f9fa;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Sidebar */
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 250px;
-      height: 100vh;
-      background: linear-gradient(180deg, #003366, #001f3f);
-      padding-top: 100px;
-      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
-      color: #cdd4e0;
-      display: flex;
-      flex-direction: column;
-      user-select: none;
-      z-index: 1050;
-      transition: transform 0.3s ease;
-    }
-
-    #sidebar .sidebar-brand {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 250px;
-      height: 100px;
-      background-color: #002b5c;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-      z-index: 1100;
-    }
-
-    #sidebar .sidebar-brand img {
-      width: 140px;
-      cursor: pointer;
-    }
-
-    #sidebar ul.nav {
-      flex-grow: 1;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #sidebar ul.nav li.nav-item {
-      margin: 0.25rem 0;
-    }
-
-    #sidebar ul.nav li.nav-item a.nav-link {
-      display: block;
-      color: #cdd4e0;
-      padding: 12px 20px;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 8px;
-      letter-spacing: 0.06em;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    #sidebar ul.nav li.nav-item a.nav-link:hover,
-    #sidebar ul.nav li.nav-item a.nav-link:focus {
-      background-color: rgba(0, 191, 166, 0.1);
-      color: #00bfa6;
-      box-shadow: inset 4px 0 0 #00bfa6;
-      outline: none;
-      text-decoration: none;
-    }
-
-    #sidebar .user-info {
-      padding: 1rem 20px;
-      font-weight: 600;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      user-select: none;
-      margin-top: auto;
-    }
-
-    /* Header */
-    header.header-container {
-      position: fixed;
-      top: 0;
-      left: 250px;
-      right: 0;
-      height: 100px;
-      background: #fff;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      z-index: 1200;
-      user-select: none;
-      transition: left 0.3s ease;
-    }
-
-    .header-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #002b5c;
-      letter-spacing: 0.05em;
-      margin: 0;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .social-icons i {
-      font-size: 24px;
-      color: #002b5c;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    .social-icons i:hover,
-    .social-icons i:focus {
-      color: #00bfa6;
-      outline: none;
-    }
-
-    /* Main content */
+    /* Main content area that works with sidebar */
     main.content {
       margin-left: 250px;
-      padding: 140px 2rem;
-      background: #fff;
-      box-sizing: border-box;
+      padding: 2rem;
       flex-grow: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 240px);
-      transition: margin-left 0.3s ease;
+      background-color: #fff;
+      box-sizing: border-box;
+      min-height: calc(100vh - 200px); /* Account for footer */
     }
 
     /* Profile container */
@@ -175,7 +41,7 @@
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(75, 0, 130, 0.15);
       padding: 40px 35px;
-      margin: 0 auto;
+      margin: 2rem auto;
     }
 
     .profile-header {
@@ -262,25 +128,6 @@
       color: #fff;
     }
 
-    /* Footer */
-    footer.site-footer {
-      margin-left: 250px;
-      width: calc(100% - 250px);
-      box-sizing: border-box;
-      background: linear-gradient(to right, #2c3e50, #4ca1af);
-      color: #f8f9fa;
-      padding: 40px 3rem;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 1rem;
-      line-height: 1.6;
-      user-select: none;
-      text-align: center;
-      flex-shrink: 0;
-      transition: margin-left 0.3s ease, width 0.3s ease;
-    }
-
     /* Toggle button for mobile */
     .sidebar-toggle {
       display: none;
@@ -297,55 +144,19 @@
     }
 
     /* Responsive */
-    @media (max-width: 992px) {
+    @media (max-width: 768px) {
       .sidebar-toggle {
         display: block;
       }
       
-      #sidebar {
-        transform: translateX(-250px);
-      }
-      
-      header.header-container,
-      main.content,
-      footer.site-footer {
-        margin-left: 0;
-        left: 0;
-        width: 100%;
-      }
-      
-      #sidebar.show {
-        transform: translateX(0);
-      }
-      
-      body.sidebar-open {
-        overflow: hidden;
-      }
-      
-      body.sidebar-open::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1040;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .header-title {
-        font-size: 2rem;
-      }
-      
       main.content {
-        padding: 100px 1.5rem;
-        min-height: calc(100vh - 200px);
+        margin-left: 0;
+        padding: 1rem;
       }
       
       .profile-container {
         padding: 30px 20px;
+        margin: 1rem auto;
       }
       
       .form-row {
@@ -361,11 +172,8 @@
     <i class="fa fa-bars"></i>
   </button>
 
-  {% comment %} {% include 'recruiter_nav.html' %} {% endcomment %}
-
-  <header class="header-container" role="banner">
-    <h1 class="header-title">Recruiter Dashboard</h1>
-  </header> 
+  <!-- Include the navigation sidebar -->
+  {% include 'recruiter_nav.html' %}
 
   <main class="content" role="main">
     <div class="profile-container">
@@ -417,28 +225,31 @@
     </div>
   </main>
 
+  <!-- Include the footer -->
   {% include 'footer.html' %}
-{% include 'recruiter_nav.html' %} 
+
   <script>
     // Sidebar toggle functionality
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
     const body = document.body;
 
-    sidebarToggle.addEventListener('click', function() {
-      sidebar.classList.toggle('show');
-      body.classList.toggle('sidebar-open');
-    });
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('show');
+        body.classList.toggle('sidebar-open');
+      });
 
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-      if (window.innerWidth <= 992 && body.classList.contains('sidebar-open')) {
-        if (!sidebar.contains(event.target) && event.target !== sidebarToggle) {
-          sidebar.classList.remove('show');
-          body.classList.remove('sidebar-open');
+      // Close sidebar when clicking outside on mobile
+      document.addEventListener('click', function(event) {
+        if (window.innerWidth <= 768 && body.classList.contains('sidebar-open')) {
+          if (!sidebar.contains(event.target) && event.target !== sidebarToggle && !sidebarToggle.contains(event.target)) {
+            sidebar.classList.remove('show');
+            body.classList.remove('sidebar-open');
+          }
         }
-      }
-    });
+      });
+    }
   </script>
 </body>
 

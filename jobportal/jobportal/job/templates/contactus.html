@@ -1,28 +1,124 @@
 {% load static %}
 {% block body %}
 {% include 'nav.html' %}
-<div class="container " style="margin-top: 50px">
-    <h1 class="text-center"> Contact Us </h1>
-  <div class="row mt-5 text-center">
-    <div class="col-lg-3">
-     <h4><i class="fas fa-phone-square">  Contact</i></h4>
-        <p class="class taxt-danger font-weight-bold mt-3"><a href="tel:03068976305">03068976305</a></p>
+
+<style>
+    /* Styling for Contact Section */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Heading Styling */
+    h1 {
+        font-size: 2.5rem;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    /* Icon Styling */
+    .fa-2x {
+        font-size: 2.5rem;
+        color: #007bff;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+    }
+
+    /* Text and Link Styling */
+    p a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.3s ease;
+    }
+
+    p a:hover {
+        color: #0056b3;
+    }
+
+    /* Responsive Layout for Smaller Screens */
+    @media (max-width: 768px) {
+        .col-lg-3 {
+            flex: 1 1 100%; /* Full width on mobile */
+            margin-bottom: 20px;
+        }
+    }
+
+    /* Styling for the Row */
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .col-lg-3 {
+        text-align: center;
+        flex: 1 1 23%;
+    }
+
+    /* Margin and Padding Styling */
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+
+    .mt-3 {
+        margin-top: 1rem;
+    }
+</style>
+
+
+<!-- Contact Us Section -->
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="font-weight: bold; color: #007bff;">Contact Us</h1>
+
+    <div class="row text-center">
+        <!-- Contact Information (Phone) -->
+        <div class="col-lg-3 mb-4">
+            <h4 class="text-primary">
+                <i class="fas fa-phone-square fa-2x"></i> Contact
+            </h4>
+            <p class="text-danger font-weight-bold mt-3">
+                <a href="tel:03068976305" style="text-decoration: none; color: #dc3545;">03068976305</a>
+            </p>
+        </div>
+
+        <!-- Email Information -->
+        <div class="col-lg-3 mb-4">
+            <h4 class="text-primary">
+                <i class="fa fa-envelope fa-2x"></i> Send Email
+            </h4>
+            <p class="font-weight-bold mt-3">
+                <a href="mailto:zali83715@gmail.com" style="text-decoration: none; color: #007bff;">zali83715@gmail.com</a>
+            </p>
+        </div>
+
+        <!-- Office Address Information -->
+        <div class="col-lg-3 mb-4">
+            <h4 class="text-primary">
+                <i class="fa fa-address-card fa-2x"></i> Office Address
+            </h4>
+            <p class="font-weight-bold mt-3">
+                <a href="https://www.google.com/maps/search/dhq+layyah+address+on+google+map/@30.9658848,70.9151417,13z/data=!3m1!4b1?hl=en-GB"
+                   style="text-decoration: none; color: #007bff;" target="_blank">
+                    Address of Our Office
+                </a>
+            </p>
+        </div>
+
+        <!-- Office Time Information -->
+        <div class="col-lg-3 mb-4">
+            <h4 class="text-primary">
+                <i class="fa fa-clock fa-2x"></i> Office Time
+            </h4>
+            <p class="font-weight-bold mt-3">10 AM to 5 PM</p>
+        </div>
     </div>
-    <div class="col-lg-3">
-      <h4><i class="fa fa-envelope">  send-Email</i></h4>
-        <p class="font-weight-bold mt-3"><a href="mailto:">zali83715@gmail.com</a></p>
-    </div>
-    <div class="col-lg-3">
-      <h4><i class="fa fa-address-card">  Office address</i></h4>
-        <p class="font-weight-bold mt-3"><a href="https://www.google.com/maps/search/dhq+layyah+address+on+google+map/@30.9658848,70.9151417,13z/data=!3m1!4b1?hl=en-GB">
-            Adress of Our Office
-        </a></p>
-    </div>
-      <div class="col-lg-3">
-     <h4><i class="fa fa-address-card">  Office time</i></h4>
-          <p class="font-weight-bold mt-3"> 10 AM TO 5PM</p>
-    </div>
-  </div>
 </div>
+
 {% include 'footer.html' %}
 {% endblock %}

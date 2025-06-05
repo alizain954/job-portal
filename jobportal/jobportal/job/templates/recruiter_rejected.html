@@ -2,15 +2,76 @@
 {% block body %}
 {% include 'admin_nava.html' %}
 
-<div class="container mt-3">
+<style>
+   /* General Table Styling */
+   table {
+      width: 100%;
+      margin-top: 20px;
+   }
+
+   /* Table Header Styling */
+   .thead-dark th {
+      background-color: #343a40;
+      color: white;
+      font-weight: bold;
+   }
+
+   /* Hover Effect on Rows */
+   tbody tr:hover {
+      background-color: #f8f9fa;
+      cursor: pointer;
+   }
+
+   /* Profile Image Styling */
+   img {
+      object-fit: cover;
+   }
+
+   /* Status Badge Styling */
+   .badge-danger {
+      background-color: #dc3545;
+   }
+
+   /* Action Button Styling */
+   .btn-outline-success {
+      border-color: #28a745;
+      color: #28a745;
+   }
+
+   .btn-outline-success:hover {
+      background-color: #28a745;
+      color: white;
+      border-color: #28a745;
+   }
+
+   /* Marquee Styling */
+   marquee {
+      font-size: 25px;
+      color: green;
+      background-color: purple;
+      font-weight: bold;
+      margin-top: 1%;
+      padding: 10px;
+   }
+
+   /* Responsive Table Styling */
+   @media (max-width: 768px) {
+      .table-responsive {
+         overflow-x: scroll;
+      }
+   }
+</style>
+
+
+<div class="container mt-5">
     <h2 class="text-center text-white py-2" style="background-color: purple; font-weight: bold;">
         View All Rejected
     </h2>
 
     <div class="table-responsive mt-4">
-        <table class="table table-hover" id="example">
-            <thead>
-                <tr style="background-color:red;">
+        <table class="table table-bordered table-hover shadow-lg" id="example">
+            <thead class="thead-dark">
+                <tr>
                     <th scope="col">S.No.</th>
                     <th scope="col">Full Name</th>
                     <th scope="col">Email ID</th>
@@ -32,13 +93,13 @@
                     <td>{{ i.gender }}</td>
                     <td>{{ i.company }}</td>
                     <td>
-                        <img src="{{ i.image.url }}" height="100" width="100" alt="Image of {{ i.user.first_name }}">
+                        <img src="{{ i.image.url }}" height="100" width="100" class="rounded-circle" alt="Image of {{ i.user.first_name }}">
                     </td>
-                    <td>{{ i.status }}</td>
                     <td>
-                        <a href="{% url 'change_status' i.id %}" class="btn btn-success btn-sm">
-                            Change Status
-                        </a>
+                        <span class="badge badge-danger">{{ i.status }}</span>
+                    </td>
+                    <td>
+                        <a href="{% url 'change_status' i.id %}" class="btn btn-outline-success btn-sm">Change Status</a>
                     </td>
                 </tr>
                 {% empty %}
